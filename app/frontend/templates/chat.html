@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block title %}Study Assistant - Study Buddy{% endblock %}
+
+{% block content %}
+<div class="chat-container">
+    <div class="chat-header">
+        <h1><i class="fas fa-robot"></i> Study Assistant</h1>
+        <p>Your AI-powered learning companion</p>
+    </div>
+
+    <div class="chat-interface">
+        <div class="chat-messages" id="chatMessages">
+            <div class="bot-message">
+                <div class="message-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="message-content">
+                    <p>Hello! I'm your Study Buddy assistant powered by Google Gemini AI. I can help you with:</p>
+                    <ul>
+                        <li>Explaining programming concepts (Python, JavaScript, etc.)</li>
+                        <li>Web development questions (HTML, CSS, React)</li>
+                        <li>Database fundamentals (SQL, NoSQL)</li>
+                        <li>Study techniques and learning strategies</li>
+                        <li>Creating personalized practice questions</li>
+                        <li>Code debugging and optimization tips</li>
+                    </ul>
+                    <p>I know about your study progress and can provide personalized advice. What would you like to learn about today?</p>
+                    <div class="ai-status" id="aiStatus">
+                        <i class="fas fa-circle" id="statusIcon"></i>
+                        <span id="statusText">Checking AI connection...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-input-container">
+            <div class="quick-actions">
+                <button class="quick-btn" onclick="sendQuickMessage('Explain Python basics')">
+                    <i class="fab fa-python"></i> Python Help
+                </button>
+                <button class="quick-btn" onclick="sendQuickMessage('Help me with web development')">
+                    <i class="fas fa-code"></i> Web Dev
+                </button>
+                <button class="quick-btn" onclick="sendQuickMessage('Database concepts')">
+                    <i class="fas fa-database"></i> Database
+                </button>
+                <button class="quick-btn" onclick="generateQuestion()">
+                    <i class="fas fa-question-circle"></i> Practice Question
+                </button>
+            </div>
+            
+            <div class="chat-input-wrapper">
+                <input type="text" id="chatInput" placeholder="Ask me anything about your studies..." 
+                       onkeypress="handleKeyPress(event)">
+                <button id="sendButton" onclick="sendMessage()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="chat-sidebar">
+        <div class="sidebar-section">
+            <h3><i class="fas fa-history"></i> Recent Topics</h3>
+            <div class="recent-topics" id="recentTopics">
+                <div class="topic-item">Python Programming</div>
+                <div class="topic-item">Web Development</div>
+                <div class="topic-item">Study Techniques</div>
+            </div>
+        </div>
+
+        <div class="sidebar-section">
+            <h3><i class="fas fa-lightbulb"></i> Study Tips</h3>
+            <div class="study-tips">
+                <div class="tip-item">
+                    <i class="fas fa-clock"></i>
+                    <span>Use spaced repetition for better retention</span>
+                </div>
+                <div class="tip-item">
+                    <i class="fas fa-brain"></i>
+                    <span>Practice active recall while studying</span>
+                </div>
+                <div class="tip-item">
+                    <i class="fas fa-target"></i>
+                    <span>Set specific learning goals</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar-section">
+            <h3><i class="fas fa-chart-line"></i> Your Progress</h3>
+            <div class="progress-summary" id="progressSummary">
+                <div class="progress-item">
+                    <span class="label">Study Streak:</span>
+                    <span class="value" id="sidebarStreak">0 days</span>
+                </div>
+                <div class="progress-item">
+                    <span class="label">Cards Studied:</span>
+                    <span class="value" id="sidebarCards">0</span>
+                </div>
+                <div class="progress-item">
+                    <span class="label">Accuracy:</span>
+                    <span class="value" id="sidebarAccuracy">0%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Study Buddy{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="dashboard-header">
+        <h1><i class="fas fa-tachometer-alt"></i> Dashboard</h1>
+        <p>Welcome back, {{ user.username }}! Ready to continue learning?</p>
+    </div>
+
+    <div class="stats-grid" id="statsGrid">
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-fire"></i>
+            </div>
+            <div class="stat-content">
+                <h3 id="streakCount">0</h3>
+                <p>Study Streak</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-brain"></i>
+            </div>
+            <div class="stat-content">
+                <h3 id="cardsStudied">0</h3>
+                <p>Cards Studied</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <div class="stat-content">
+                <h3 id="totalSessions">0</h3>
+                <p>Study Sessions</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-trophy"></i>
+            </div>
+            <div class="stat-content">
+                <h3 id="accuracyRate">0%</h3>
+                <p>Success Rate</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard-actions">
+        <div class="action-card">
+            <div class="action-content">
+                <h3><i class="fas fa-play-circle"></i> Continue Studying</h3>
+                <p>Pick up where you left off with your current study set</p>
+                <a href="{{ url_for('study') }}" class="btn btn-primary">
+                    <i class="fas fa-arrow-right"></i> Start Session
+                </a>
+            </div>
+        </div>
+
+        <div class="action-card">
+            <div class="action-content">
+                <h3><i class="fas fa-chart-bar"></i> View Progress</h3>
+                <p>Analyze your learning patterns and performance metrics</p>
+                <button class="btn btn-secondary" onclick="viewProgress()">
+                    <i class="fas fa-chart-line"></i> Analytics
+                </button>
+            </div>
+        </div>
+
+        <div class="action-card">
+            <div class="action-content">
+                <h3><i class="fas fa-robot"></i> AI Study Assistant</h3>
+                <p>Get help from your AI tutor with explanations and practice questions</p>
+                <a href="{{ url_for('chat_page') }}" class="btn btn-accent">
+                    <i class="fas fa-comments"></i> Chat Now
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="recent-activity">
+        <h2><i class="fas fa-history"></i> Recent Activity</h2>
+        <div class="activity-list">
+            <div class="activity-item">
+                <div class="activity-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="activity-content">
+                    <h4>Completed Python Basics</h4>
+                    <p>Finished 25 cards with 92% accuracy</p>
+                    <span class="activity-time">2 hours ago</span>
+                </div>
+            </div>
+            <div class="activity-item">
+                <div class="activity-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="activity-content">
+                    <h4>Achievement Unlocked</h4>
+                    <p>7-day study streak milestone reached!</p>
+                    <span class="activity-time">1 day ago</span>
+                </div>
+            </div>
+            <div class="activity-item">
+                <div class="activity-icon">
+                    <i class="fas fa-plus"></i>
+                </div>
+                <div class="activity-content">
+                    <h4>Created New Deck</h4>
+                    <p>Added "JavaScript Functions" study deck</p>
+                    <span class="activity-time">3 days ago</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+async function loadUserStats() {
+    try {
+        const response = await fetch('/api/user/stats');
+        const stats = await response.json();
+        
+        document.getElementById('streakCount').textContent = stats.streak;
+        document.getElementById('cardsStudied').textContent = stats.cards_studied;
+        document.getElementById('totalSessions').textContent = stats.total_sessions;
+        document.getElementById('accuracyRate').textContent = stats.accuracy + '%';
+    } catch (error) {
+        console.error('Failed to load user stats:', error);
+    }
+}
+
+function createDeck() {
+    window.location.href = '/study';
+}
+
+function viewProgress() {
+    alert('Analytics dashboard coming soon! Your progress is being tracked.');
+}
+
+// Load stats when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    loadUserStats();
+});
+</script>
+{% endblock %}

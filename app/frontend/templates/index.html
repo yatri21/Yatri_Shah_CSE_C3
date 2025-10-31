@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Website</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 Study Platform</h1>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </header>
+
+        <main>
+            <div class="study-card" id="studyCard">
+                <div class="card-content">
+                    <div class="question-side" id="questionSide">
+                        <h2>Question</h2>
+                        <p id="questionText">Loading...</p>
+                        <button class="btn btn-primary" onclick="showAnswer()">Show Answer</button>
+                    </div>
+                    <div class="answer-side" id="answerSide" style="display: none;">
+                        <h2>Answer</h2>
+                        <p id="answerText"></p>
+                        <div class="answer-buttons">
+                            <button class="btn btn-success" onclick="markCorrect()">✓ Got it!</button>
+                            <button class="btn btn-warning" onclick="markIncorrect()">✗ Need practice</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button class="btn btn-secondary" onclick="previousCard()">← Previous</button>
+                <span id="cardCounter">1 / 4</span>
+                <button class="btn btn-secondary" onclick="nextCard()">Next →</button>
+            </div>
+
+            <div class="quiz-section">
+                <button class="btn btn-accent" onclick="startQuiz()">Start Quiz Mode</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+
+</html>

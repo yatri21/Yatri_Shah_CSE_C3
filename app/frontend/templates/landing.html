@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome to Study Buddy{% endblock %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="hero-content">
+        <h1><i class="fas fa-graduation-cap"></i> Study Buddy</h1>
+        <p class="hero-subtitle">Your AI-powered learning companion</p>
+        <p class="hero-description">
+            Master any subject with interactive flashcards, progress tracking, and personalized study sessions.
+        </p>
+        <div class="hero-buttons">
+            <a href="{{ url_for('register') }}" class="btn btn-primary btn-large">
+                <i class="fas fa-rocket"></i> Get Started Free
+            </a>
+            <a href="{{ url_for('login') }}" class="btn btn-secondary btn-large">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="features-section">
+    <div class="container">
+        <h2>Why Choose Study Buddy?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>Smart Learning</h3>
+                <p>AI-powered spaced repetition helps you remember more with less effort</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Progress Tracking</h3>
+                <p>Visual analytics show your learning progress and identify areas for improvement</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>Study Groups</h3>
+                <p>Collaborate with friends and join study communities for better learning</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>Study Anywhere</h3>
+                <p>Responsive design works perfectly on desktop, tablet, and mobile devices</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="cta-section">
+    <div class="container">
+        <h2>Ready to Transform Your Learning?</h2>
+        <p>Join thousands of students who've improved their grades with Study Buddy</p>
+        <a href="{{ url_for('register') }}" class="btn btn-accent btn-large">
+            <i class="fas fa-star"></i> Start Learning Today
+        </a>
+    </div>
+</div>
+{% endblock %}
